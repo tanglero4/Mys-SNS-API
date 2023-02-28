@@ -1,54 +1,54 @@
-const { Ponder, User } = require('../models');
+const { Notion, userName } = require('../models');
 
 module.exports = {
-  // Retrieve thoughts
-  getPonder(req, res) {
-    Ponder.find()
-      .then((pondering) => res.json(pondering))
+  // Retrieve notions
+  getNotions(req, res) {
+    Notion.find()
+      .then((notions) => res.json(notions))
       .catch((err) => res.status(500).json(err));
   },
-  // Retrieve one thought
-  getPonder(req, res) {
-    Ponder.findOne({ _id: req.params.ponderId })
+  // Retrieve one notion
+  getNotion(req, res) {
+    Notion.findOne({ _id: req.params.notionId })
       .select('-__v')
-      .then((ponder) =>
-        !ponder
-          ? res.status(404).json({ message: 'No views found' })
-          : res.json(ponder)
+      .then((notion) =>
+        !notion
+          ? res.status(404).json({ message: 'No notions found' })
+          : res.json(notion)
       )
       .catch((err) => res.status(500).json(err));
   },
-  // Make a thought
-  makePonder(req, res) {
-    Ponder.create(req.body)
-      .then((ponder) => res.json(ponder))
+  // Make a notion
+  makeNotion(req, res) {
+    Notion.create(req.body)
+      .then((notion) => res.json(notion))
       .catch((err) => {
         console.log(err);
         return res.status(500).json(err);
       });
   },
-  // Delete thoughts
-  detePonder(req, res) {
-    Ponder.findOneAndDelete({ _id: req.params.ponderId })
-      .then((ponder) =>
-        !ponder
-          ? res.status(404).json({ message: 'No views with that ID' })
-          : User.deleteMany({ _id: { $in: ponder.users } })
+  // Delete notions
+  deteNotion(req, res) {
+    Notion.findOneAndDelete({ _id: req.params.notionId })
+      .then((notion) =>
+        !notion
+          ? res.status(404).json({ message: 'No notions with that ID' })
+          : User.deleteMany({ _id: { $in: notion.userName } })
       )
-      .then(() => res.json({ message: 'Views and Users deleted!' }))
+      .then(() => res.json({ message: 'Notions and user name has been deleted' }))
       .catch((err) => res.status(500).json(err));
   },
-  // Update a course
-updatePonder(req, res) {
-  Ponder.findOneAndUpdate(
-      { _id: req.params.ponderId },
+  // Update a notion
+updateNotion(req, res) {
+  Notion.findOneAndUpdate(
+      { _id: req.params.notionId },
       { $set: req.body },
       { runValidators: true, new: true }
     )
-      .then((ponder) =>
-        !ponder
-          ? res.status(404).json({ message: 'No views with this id!' })
-          : res.json(ponder)
+      .then((notion) =>
+        !notion
+          ? res.status(404).json({ message: 'No thoughts found!' })
+          : res.json(notion)
       )
       .catch((err) => res.status(500).json(err));
   },
