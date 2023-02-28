@@ -1,5 +1,5 @@
 const { ObjectId } = require('mongoose').Types;
-const { UserName, Notion } = require('../models');
+const { UserName, Notion } = require('../models/index');
 
 module.exports = {
   // Retrieves all user names

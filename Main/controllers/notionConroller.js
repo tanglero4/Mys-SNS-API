@@ -1,4 +1,4 @@
-const { Notion, userName } = require('../models');
+const { Notion, userName } = require('../models/index');
 
 module.exports = {
   // Retrieve notions
