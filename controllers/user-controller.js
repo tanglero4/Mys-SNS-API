@@ -1,6 +1,6 @@
 const { Reaction } = require('../models/Index');
 const User = require('../models/User');
-
+const Thought =require(`../models/Thought`);
 const userController = {
   // Retrieve all users
 getUsers(req, res) {
@@ -17,7 +17,7 @@ createUser(req, res) {
 // Get a single user
 getSingleUser(req, res) {
   User.findOne({ _id: req.params.userId })
-    .select('-__v')
+    .select('-__v').populate("thoughts")
     .then((user) =>
       !user
         ? res.status(404).json({ message: 'No user with that ID' })

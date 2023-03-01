@@ -26,7 +26,6 @@ const reactingSchema = new Schema(
         type: Date,
         default: Date.now,
         get madeAt() {
-          // unsure of this part
           return Date
         }
     },
@@ -40,4 +39,4 @@ const reactingSchema = new Schema(
     )
 
 
-module.exports = Reaction
+module.exports = reactingSchema
