@@ -15,15 +15,21 @@
 ## Description
 
 ## Usage
+- Open terminal and run npm start
+- Have your MongoDB connected
 
 
-![](./image/)
+![Video walk throught of user controllers being used in insomnia](./Assets/image/user.gif)
+![Video walk throught of thoughts controllers being used in insomnia and reactions being added and removed](./Assets/image/Thought-Reaction.gif)
+![MongoDB showing all user arrays for snsDB](./Assets/image/user-mongoDB.png)
+![MongoDB showing all thought and reaction arrays for snsDB](./Assets/image/ThoughtsDB.png)
 
 ## Contributing
 Tiffany Anglero
 
 ## Installation
-User will need to install npm inquirer using the terminal on Vscode. 
+User will need to install npm inquirer using the terminal on Vscode, download MongoDB and insomnia or postman. 
+
 
 ## Tests
 run node index.js
