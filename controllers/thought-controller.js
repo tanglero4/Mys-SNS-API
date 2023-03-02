@@ -53,12 +53,14 @@ const thoughtController = {
   updateThought(req, res) {
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
-      { $set: req.body },
+      req.body,
       { runValidators: true, new: true }
-    ).sort({ createdAt: -1 })
+    )
       .then((thought) =>
         !thought
-          ? res.status(404).json({ message: 'No thoughts have been updated!' })
+          ? res
+              .status(404)
+              .json({ message: 'No thought found with that ID :(' })
           : res.json(thought)
       )
       .catch((err) => res.status(500).json(err));
@@ -82,7 +84,7 @@ const thoughtController = {
     console.log(req.body);
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
-      { $addToSet: { reacting: req.body } },
+      { $addToSet: { reaction: req.body } },
       { runValidators: true, new: true }
     )
       .then((thought) =>
@@ -98,7 +100,7 @@ const thoughtController = {
   removeReaction(req, res) {
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
-      { $pull: { reacting: { reactingId: req.params.reactingId } } },
+      { $pull: { reaction: { reactionId: req.params.reactionId } } },
       { runValidators: true, new: true }
     )
       .then((thought) =>
