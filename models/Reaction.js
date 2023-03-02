@@ -1,42 +1,36 @@
-const { Schema, model } = require('mongoose');
-const thoughtSchema = require('./Thought');
+const { Schema, Types } = require('mongoose');
 
 const reactingSchema = new Schema(
     {
   
-      reactingId: [
+      reactingId: 
           {
               type: Schema.Types.ObjectId,
               default: () => new Types.ObjectId(),
           },
-      ],
+          
 
-      reactingBody: {
-        type: String,
-        required: true,
-        maxLength: 280,
-      },
-
-      username: {
-        type: String,
-        required: true,
-      },
-
-      madeAt: {
-        type: Date,
-        default: Date.now,
-        get madeAt() {
-          return Date
-        }
-    },
-},
-    {
-        toJSON: {
-          getters: true,
+        reactingBody: {
+          type: String,
+          required: true,
+          maxLength: 280,
         },
-        id: false,
-      }
-    )
 
+        username: {
+          type: String,
+          required: true,
+        },
 
-module.exports = reactingSchema
+        madeAt: {
+          type: Date,
+          default: Date.now,
+      },
+},
+  {
+      toJSON: {
+        getters: true,
+      },
+      id: false,
+    }
+);
+module.exports = reactingSchema;

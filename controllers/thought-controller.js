@@ -1,14 +1,9 @@
 const { Reaction } = require('../models/Reaction');
-const Thought = require('../models/Thought');
+const {User, Thought} = require('../models');
+
 
 const thoughtController = {
-    // Retrieve all thoughts
-  // getThoughts(req, res) {
-  //   Thought.find()
-  //       .then((users) => res.json(users))
-  //       .json({ message: 'No thoughts found with that ID :(' })
-  //       .catch((err) => res.status(500).json(err));
-  //   },
+    // Create thoughts
     createThought(req, res) {
       Thought.create(req.body)
         .then((dbThoughtData) => {
@@ -30,14 +25,7 @@ const thoughtController = {
           res.status(500).json(err);
         });
     },
-  
-    // Create new thought
-  // createThought(req, res) {
-  //   Thought.create(req.body)
-  //   .then((dbUserData) => res.json(dbUserData))
-  //   .json({ message: 'No new thought found with that ID :(' })
-  //   .catch((err) => res.status(500).json(err));
-  // },
+// Get thoughts
   getThoughts(req, res) {
     Thought.find()
       .sort({ createdAt: -1 })
@@ -49,6 +37,28 @@ const thoughtController = {
         res.status(500).json(err);
       });
   },
-
+  getSingleThought(req, res) {
+    Thought.findOne({ _id: req.params.thoughtId })
+      .sort({ createdAt: -1 })
+      .then((dbThoughtData) => {
+        res.json(dbThoughtData);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+  },
+  deleteThought(req, res) {
+    Thought.findOneAndDelete({ _id: req.params.thoughtId })
+    .then((thought) =>
+    !thought
+      ? res.status(404).json({ message: 'There are no thoughts with that ID' })
+      : User.deleteMany({ _id: { $in: thought.user } })
+  )
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+  },
   }
     module.exports = thoughtController
