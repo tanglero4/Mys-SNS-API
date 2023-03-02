@@ -18,9 +18,9 @@ router
   .delete(deleteThought);
 
   // /api/students/:studentId/assignments
-router.route('/:thoughtId/reacting').post(addReaction);
+router.route('/:thoughtId/reaction').post(addReaction);
 
 // /api/students/:studentId/assignments/:assignmentId
-router.route('/:thoughtId/reacting/:reactingId').delete(removeReaction);
+router.route('/:thoughtId/reaction/:reactionId').delete(removeReaction);
 
 module.exports = router;
