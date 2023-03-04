@@ -1,7 +1,7 @@
 {
-    "name": "social-network-api",
+    "name": "My-SNS-API",
     "version": "1.0.1",
-    "description": "The api for a social network",
+    "description": "The api for creating users, thoughts reactions in a social network api",
     "main": "server.js",
     "license": "MIT",
     "scripts": {
