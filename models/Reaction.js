@@ -1,5 +1,5 @@
 const { Schema, Types } = require('mongoose');
-
+// Requiered params
 const reactionSchema = new Schema(
     {
   
@@ -8,8 +8,6 @@ const reactionSchema = new Schema(
               type: Schema.Types.ObjectId,
               default: () => new Types.ObjectId(),
           },
-          
-
         reactionBody: {
           type: String,
           required: true,
@@ -20,7 +18,6 @@ const reactionSchema = new Schema(
           type: String,
           required: true,
         },
-
         madeAt: {
           type: Date,
           default: Date.now,

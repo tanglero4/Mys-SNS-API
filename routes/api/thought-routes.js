@@ -9,18 +9,19 @@ const {
     removeReaction
 } = require('../../controllers/thought-controller');
 
-router.route('/').get(getThoughts).post(createThought);
-
+// routes to controllers for thoughts
 router
   .route('/:thoughtId')
   .get(getSingleThought)
   .put(updateThought)
   .delete(deleteThought);
 
-  // /api/thoughts/:thoughtId/reaction
+  // adds both thought routes after the '/' in the api url
+router.route('/').get(getThoughts).post(createThought);
+
+  // adds reaction controller at the end of url
 router.route('/:thoughtId/reaction').post(addReaction);
 
-// /api/thoughts/:thoughtId/reaction/:reactionId
 router.route('/:thoughtId/reaction/:reactionId').delete(removeReaction);
 
 module.exports = router;

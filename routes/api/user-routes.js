@@ -1,4 +1,5 @@
 const router = require('express').Router();
+// routes to controllers for users
 const {
   getUsers,
   getSingleUser,
@@ -7,10 +8,10 @@ const {
   deleteUser
 } = require('../../controllers/user-controller');
 
-// /api/users
+// adds both user routes after the '/' in the api url
 router.route('/').get(getUsers).post(createUser);
 
-// /api/users/:userId
+// Adds controller routes to end of API url
 router.route('/:userId').get(getSingleUser).delete(deleteUser).put(updateUser);
 
 module.exports = router;
